@@ -293,7 +293,7 @@ kdensity r16 if ms16==3, kernel(gauss) n(300)  gen(x3 d3) nograph
 
 Plus lisible qu'un histogramme à mon avis
 
-```{r,eval=F, echo=T} 
+```{} 
 local leg legend(order(3 "Married or pacsed" 2 "Cohabitant" 1 "Isolated") pos(7) col(3) region(lc(%0))) 
 local bgc plotr(color(white)) graphr(color(white))
 local note note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2)) 
