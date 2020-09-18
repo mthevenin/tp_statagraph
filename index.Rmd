@@ -2,11 +2,11 @@
 title: "TP Formation visualisation des données UR9"
 author: "Marc Thevenin"
 date: "04/09/2020"
-output:
-  html_document:
-    toc: yes
-  word_document:
-    toc: yes
+#output:
+#  html_document:
+#    toc: yes
+#  word_document:
+#    toc: yes
 ---
 
 ```{r setup, include=FALSE}
