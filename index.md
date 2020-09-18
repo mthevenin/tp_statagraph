@@ -41,7 +41,7 @@ histogram r16, normal
 Nombre de barres =  20
 
 
-```{r,eval=F, echo=T} 
+```{} 
 histogram r16, bin(20)
 ```
 
@@ -50,7 +50,7 @@ histogram r16, bin(20)
 
 Changements couleurs des barres et contour
 
-```{r,eval=F, echo=T} 
+```{} 
 * barre
 histogram r16, bin(20) fc(blue)
 ```
@@ -58,7 +58,7 @@ histogram r16, bin(20) fc(blue)
 ![](img/img3.png)
 
 
-```{r,eval=F, echo=T} 
+```{} 
 * barre et contour même couleur
 histogram r16, bin(20) color(blue)
 ```
@@ -67,7 +67,7 @@ histogram r16, bin(20) color(blue)
 ![](img/img4.png)
 
 
-```{r,eval=F, echo=T} 
+```{} 
 * barre et contour couleurs différentes
 histogram r16, bin(20) color(blue)
 ```
@@ -76,7 +76,7 @@ histogram r16, bin(20) color(blue)
 
 Modification de la transparence (stata 15 minimum) ou de la saturation (intensity)
 
-```{r,eval=F, echo=T} 
+```{} 
 * 60% transparence
 histogram r16, bin(20) fc(blue%60) lc(white)
 ```
@@ -84,7 +84,7 @@ histogram r16, bin(20) fc(blue%60) lc(white)
 
 ![](img/img6.png)
 
-```{r,eval=F, echo=T} 
+```{} 
 * .6 saturation
 histogram r16, bin(20) fc(blue*.6) lc(white)
 ```
@@ -101,7 +101,7 @@ En ajoutant quelques options:
 * titre positionné à 11 heures, en gras
 
 
-```{r,eval=F, echo=T} 
+```{} 
 tw histogram r16, percent fc(blue%60) lc(black) lw(vthin) bin(20) ///
 title("{bf:Revenus 2016}", pos(11)) ///
 ylabel(, angle(0) glc(gs3) glw(.1)) ///
@@ -118,14 +118,14 @@ graphr(color(white)) plotr(color(white))
 Directement avec `kdensity`
 
 
-```{r,eval=F, echo=T} 
+```{} 
 kdensity r16
 ```
 
 ![](img/img9.png)
 
 
-```{r,eval=F, echo=T} 
+```{} 
 kdensity r16, n(200) kernel(gauss)
 ```
 
@@ -137,7 +137,7 @@ Avec kdensity (création variable) + area/line
 Création des variables
 
 
-```{r,eval=F, echo=T} 
+```{} 
 kdensity r16, gen(x d) n(200) kernel(gauss) nograph
 ```
 
@@ -145,7 +145,7 @@ kdensity r16, gen(x d) n(200) kernel(gauss) nograph
 Graphique
 
 
-```{r,eval=F, echo=T} 
+```{} 
 tw line  d x, recast(area)  color(blue%60)
 ```
 
@@ -153,7 +153,7 @@ tw line  d x, recast(area)  color(blue%60)
 ou 
 
 
-```{r,eval=F, echo=T} 
+```{} 
 tw area  d x, color(blue%60)
 ```
 >
@@ -168,7 +168,7 @@ En ajoutant quelques options:
 * titre positionné à 11 heures, en gras
 
 >
-```{r,eval=F, echo=T} 
+```{} 
 tw area  d x,  fc(blue%60) lc(black) lw(.5pt)                                 ///
 ytitle("Density") xtitle("")                                                  ///
 title("{bf:Revenus 2016}", pos(11))                                           ///
@@ -186,7 +186,7 @@ graphr(color(white)) plotr(color(white))
 Superposition [avec macros]
 
 
-```{r,eval=F, echo=T} 
+```{} 
 capt drop  _d* _x*
 local c1 "red%50"
 local c2 "blue%50"
@@ -213,7 +213,7 @@ graphr(color(white)) plotr(color(white))
 Type beans [sans macro]
 
 
-```{r,eval=F, echo=T} 
+```{} 
 gen _dr16b = -_dr16
 
 tw  area _dr12 _xr12,   fc(red%60)  lc(%0)                                     ///
@@ -237,7 +237,7 @@ graphr(color(white)) plotr(color(white))
 
 Superposition: peu lisible
 
-```{r,eval=F, echo=T} 
+```{} 
 local leg 1 "Married or pacsed" 2 "Cohabitant" 3 "Isolated"
 
 tw histogram r16 if ms16==3, bin(20) percent fc(yellow%50) lc(black) lw(vvvthin) start(0)  ///
@@ -252,7 +252,7 @@ tw histogram r16 if ms16==3, bin(20) percent fc(yellow%50) lc(black) lw(vvvthin)
 Facettes avec en arrière plan les distributions des autres modalités
 
 
-```{r,eval=F, echo=T} 
+```{} 
 local bgc plotr(color(white)) graphr(color(white))
 local note note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2)) 
 
@@ -285,7 +285,7 @@ title("Revenus 2016", pos(11))  plotr(color(white)) graphr(color(white))
 Création des variables avec `kdensity`
 
 
-```{r,eval=F, echo=T} 
+```{} 
 kdensity r16 if ms16==1, kernel(gauss) n(300)  gen(x1 d1) nograph
 kdensity r16 if ms16==2, kernel(gauss) n(300)  gen(x2 d2) nograph
 kdensity r16 if ms16==3, kernel(gauss) n(300)  gen(x3 d3) nograph
@@ -307,7 +307,7 @@ tw area d3 x3, fc(yellow%50) lc(black) lw(vthin) ///
 ![](img/img17.png)
 
 
-```{r,eval=F, echo=T} 
+```{} 
 local bgc plotr(color(white)) graphr(color(white))
 local note note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2)) 
 
@@ -342,7 +342,7 @@ title("Revenus 2016", pos(11))  plotr(color(white)) graphr(color(white))
 ## Box
 
 
-```{r,eval=F, echo=T}
+```{}
 graph box r16, over(ms16, descending) 
 ```
 
@@ -350,7 +350,7 @@ graph box r16, over(ms16, descending)
 ![](img/img19.png)
 
 
-```{r,eval=F, echo=T}
+```{}
 graph box r16, over(ms16, descending) horizontal 
 ```
 
@@ -360,7 +360,7 @@ graph box r16, over(ms16, descending) horizontal
 Ajouts d'options pour couleurs différentes (pas obligatoire cas variable statut mat sans dimension ordinale)
 
 
-```{r,eval=F, echo=T}
+```{}
 local bgc plotr(color(white)) graphr(color(white))
 local note note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2)) 
 local title title("{bf:Revenus 2016}", pos(11))   
@@ -384,7 +384,7 @@ Revenus 2012 et 2016
 
 ## Scatter
 
-```{r,eval=F, echo=T}
+```{}
 tw scatter r16 r12, mc(red)
 ```
 
@@ -392,7 +392,7 @@ tw scatter r16 r12, mc(red)
 ![](img/img22.png)
 
 
-```{r,eval=F, echo=T}
+```{}
 tw scatter r16 r12,  mc(red) mlc(white)
 ```
 
@@ -400,7 +400,7 @@ tw scatter r16 r12,  mc(red) mlc(white)
 ![](img/img23.png)
 
 
-```{r,eval=F, echo=T}
+```{}
 tw scatter r16 r12, msiz(.3) mc(red) mlc(white) mlw(.05)
 ```
 
@@ -408,7 +408,7 @@ tw scatter r16 r12, msiz(.3) mc(red) mlc(white) mlw(.05)
 ![](img/img24.png)
 
 
-```{r,eval=F, echo=T}
+```{}
 tw scatter r16 r12, msiz(.3) mc(red%50) mlc(white) mlw(.05) jitter(2)
 ```
 
@@ -420,7 +420,7 @@ tw scatter r16 r12, msiz(.3) mc(red%50) mlc(white) mlw(.05) jitter(2)
 *Avec transparence*
 
 
-```{r,eval=F, echo=T}
+```{}
 local leg legend(order(3 "Married or pacsed" 2 "Cohabitant" 1 "Isolated") pos(11) col(3) region(lc(%0))) 
 local bg plotr(color(white)) graphr(color(white))
 local note note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2)) 
@@ -446,7 +446,7 @@ Même programme, juste modifier les couleurs des bulles : par ex **`mc(red%60)`*
 
 Version avec un fond sombre (couleur gs3), et en utilisant `grstyle`
 
-```{r,eval=F, echo=T}
+```{}
 graph set window fontface "Microsoft sans serif"
 
 grstyle  init
@@ -475,7 +475,7 @@ tw scatter r16 r12 if ms16==1, mc(red*.60)     `mops'          ///
 Le programme suivant peut être automatisé dans une boucle
 
 
-```{r,eval=F, echo=T}
+```{}
 local mops  msiz(.7) mlc(gs3) mlw(.1) jitter(2) 
 local bg  graphr(color(gs3)) plotr(color(gs3))   
 local xy glc(gs13) glw(vthin) labc(gs13)         
@@ -509,7 +509,7 @@ note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2) col
 
 Même graphique, mais avec des couleurs différentes (collection colorbrewer) issues de palettes séquentielles (transition pour le graphique suivant qui nécessite ce type de palettes)
 
-```{r,eval=F, echo=T}
+```{}
 local s 5
 
 colorpalette matplotlib, spring select(`s') opacity(60) nograph
@@ -561,7 +561,7 @@ note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2) col
 
 Rappel principe: histogramme vu du dessus, la couleur de l'héxagone indique la hauteur des barres
 
-```{r,eval=F, echo=T}
+```{}
 local var3 ms16
 local labn: value label  `var3'
 local pal spring autumn winter
@@ -593,7 +593,7 @@ graphr(color(255 164 91%30))
 
 # Catplot - spineplot
 
-```{r,eval=F, echo=T}
+```{}
 ssc install catplot
 ssc install spineplot
 ```
@@ -604,7 +604,7 @@ ssc install spineplot
 Revenu 2016: appartenance aux décile selon le statut matrimonial. 
 
 
-```{r,eval=F, echo=T}
+```{}
 xtile dr16 = r16, nq(10)
 ```
 
@@ -612,7 +612,7 @@ xtile dr16 = r16, nq(10)
 
 * Pour obtenir des barres empilées, ajouter l'option* **`stack`**
 
-```{r,eval=F, echo=T}
+```{}
 grstyle init
 grstyle set mesh, compact
 grstyle set legend 3, nobox
@@ -635,7 +635,7 @@ note("{it:Equivalized continuous taxed income expressed in 2017 $}", size(2))
 ## Merimekko (mosaic plot)
 
 
-```{r,eval=F, echo=T}
+```{}
 colorpalette viridis, select(2 8 13) reverse nograph
 grstyle set color "`r(p1)'" "`r(p2)'" "`r(p3)'",  n(10)
 spineplot  dr16 ms16,                        ///
