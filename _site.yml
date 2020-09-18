@@ -1,0 +1,14 @@
+name: "TP"
+navbar:
+  title: "TP"
+  left:
+    - text: "Home"
+      href: index.html
+
+output:
+  html_document:
+    highlight: zenburn
+    number_sections: yes
+    theme: cerulean
+    toc: yes
+    toc_float: yes

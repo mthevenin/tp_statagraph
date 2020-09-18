@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Marc Thevenin" />
+
+<meta name="date" content="2020-04-09" />
+
+<title>TP Formation visualisation des données UR9</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">TP</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">TP Formation visualisation des données UR9</h1>
+<h4 class="author">Marc Thevenin</h4>
+<h4 class="date">04/09/2020</h4>
+
+</div>
+
+
+<ul>
+<li>Le TP suit l’ordre des graphiques présentées dans la partie “visualisation des données avec Stata”</li>
+<li>Graphiques utilisés
+<ul>
+<li>histogramme, densité:<code>histogram</code> - <code>kdensity</code> / <code>area</code> <code>line</code></li>
+<li>boxplot: <code>graph box</code> / <code>grap hbox</code></li>
+<li>Nuage de points: <code>scatter</code></li>
+<li>heatmap avec hexagones: <code>hexplot</code></li>
+<li>Barres pour les variables catégorielles: <code>catplot</code> - <code>spineplot</code></li>
+</ul></li>
+<li>J’ai utilisé trois couleurs simple pour une grande partie du document (red, blue, yellow), <code>colorpalette</code> et <code>grstyle</code> sont utilisés tardivement</li>
+<li>Les personnes qui n’ont pas, au moins, la version 15 de stata, ne peuvent pas utiliser les effets de transparence: <code>option_couleur(couleur%#)</code></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>use base4var, clear</span></code></pre></div>
+<div id="revenus-2012-ou-2016-histogramme---densité" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> revenus 2012 ou 2016: histogramme - densité</h1>
+<div id="histogramme" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Histogramme</h2>
+<p>Premier graph du program</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>histogram r16, normal </span></code></pre></div>
+</details>
+<p><img src="img/img1.png" /></p>
+<p>Nombre de barres = 20</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>histogram r16, <span class="kw">bin</span>(<span class="dv">20</span>)</span></code></pre></div>
+</details>
+<p><img src="img/img2.png" /></p>
+<p>Changements couleurs des barres et contour</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="op">*</span><span class="st"> </span>barre</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>histogram r16, <span class="kw">bin</span>(<span class="dv">20</span>) <span class="kw">fc</span>(blue)</span></code></pre></div>
+</details>
+<p><img src="img/img3.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="op">*</span><span class="st"> </span>barre et contour même couleur</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>histogram r16, <span class="kw">bin</span>(<span class="dv">20</span>) <span class="kw">color</span>(blue)</span></code></pre></div>
+</details>
+<p><img src="img/img4.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="op">*</span><span class="st"> </span>barre et contour couleurs différentes</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>histogram r16, <span class="kw">bin</span>(<span class="dv">20</span>) <span class="kw">color</span>(blue)</span></code></pre></div>
+</details>
+<p><img src="img/img5.png" /></p>
+<p>Modification de la transparence (stata 15 minimum) ou de la saturation (intensity)</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="op">*</span><span class="st"> </span><span class="dv">60</span>% transparence</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>histogram r16, <span class="kw">bin</span>(<span class="dv">20</span>) <span class="kw">fc</span>(blue%<span class="dv">60</span>) <span class="kw">lc</span>(white)</span></code></pre></div>
+</details>
+<p><img src="img/img6.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="op">*</span><span class="st"> </span><span class="fl">.6</span> saturation</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>histogram r16, <span class="kw">bin</span>(<span class="dv">20</span>) <span class="kw">fc</span>(blue<span class="op">*</span>.<span class="dv">6</span>) <span class="kw">lc</span>(white)</span></code></pre></div>
+</details>
+<p><img src="img/img7.png" /></p>
+<p>En ajoutant quelques options:</p>
+<ul>
+<li>Report des %</li>
+<li>valeur de y en horizontal</li>
+<li>modification du grid y (couleur et épaisseur)</li>
+<li>note pour la définition du revenu et non le titre de x - en italique</li>
+<li>titre positionné à 11 heures, en gras</li>
+</ul>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>tw histogram r16, percent <span class="kw">fc</span>(blue%<span class="dv">60</span>) <span class="kw">lc</span>(black) <span class="kw">lw</span>(vthin) <span class="kw">bin</span>(<span class="dv">20</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;{bf:Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="kw">ylabel</span>(, <span class="kw">angle</span>(<span class="dv">0</span>) <span class="kw">glc</span>(gs3) <span class="kw">glw</span>(.<span class="dv">1</span>)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a><span class="kw">graphr</span>(<span class="kw">color</span>(white)) <span class="kw">plotr</span>(<span class="kw">color</span>(white))</span></code></pre></div>
+</details>
+<p><img src="img/img8.png" /></p>
+</div>
+<div id="densité" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Densité</h2>
+<p>Directement avec <code>kdensity</code></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>kdensity r16</span></code></pre></div>
+</details>
+<p><img src="img/img9.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>kdensity r16, <span class="kw">n</span>(<span class="dv">200</span>) <span class="kw">kernel</span>(gauss)</span></code></pre></div>
+</details>
+<p><img src="img/img10.png" /></p>
+<p>Avec kdensity (création variable) + area/line</p>
+<p>Création des variables</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>kdensity r16, <span class="kw">gen</span>(x d) <span class="kw">n</span>(<span class="dv">200</span>) <span class="kw">kernel</span>(gauss) nograph</span></code></pre></div>
+</details>
+<p>Graphique</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>tw line  d x, <span class="kw">recast</span>(area)  <span class="kw">color</span>(blue%<span class="dv">60</span>)</span></code></pre></div>
+</details>
+<p>ou</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>tw area  d x, <span class="kw">color</span>(blue%<span class="dv">60</span>)</span></code></pre></div>
+</details>
+<p><img src="img/img11.png" /></p>
+<p>En ajoutant quelques options:</p>
+<ul>
+<li>valeur de y en horizontal et changement du format</li>
+<li>modification du grid y (couleur et épaisseur)</li>
+<li>note pour la définition du revenu et non le titre de x - en italique</li>
+<li>titre positionné à 11 heures, en gras</li>
+</ul>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>tw area  d x,  <span class="kw">fc</span>(blue%<span class="dv">60</span>) <span class="kw">lc</span>(black) <span class="kw">lw</span>(.5pt)                                 <span class="op">/</span><span class="er">//</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="kw">ytitle</span>(<span class="st">&quot;Density&quot;</span>) <span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>)                                                  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;{bf:Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>))                                           <span class="op">/</span><span class="er">//</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="kw">ylabel</span>(, <span class="kw">angle</span>(<span class="dv">0</span>) <span class="kw">glc</span>(gs3) <span class="kw">glw</span>(.<span class="dv">1</span>) <span class="kw">format</span>(%<span class="fl">9.5</span>f))                             <span class="op">/</span><span class="er">//</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a><span class="kw">graphr</span>(<span class="kw">color</span>(white)) <span class="kw">plotr</span>(<span class="kw">color</span>(white))</span></code></pre></div>
+</details>
+<p><img src="img/img12.png" /></p>
+<p><strong>Revenus 2012 et 2016</strong></p>
+<p>Superposition [avec macros]</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a>capt drop  _d<span class="op">*</span><span class="st"> </span>_x<span class="op">*</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>local c1 <span class="st">&quot;red%50&quot;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>local c2 <span class="st">&quot;blue%50&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a>local i=<span class="dv">1</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a>foreach v of varlist r12 r16 {</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>local j =<span class="st"> `</span><span class="dt">i++&#39;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a><span class="dt">local y: subinstr local v &quot;r&quot; &quot;&quot;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a><span class="dt">kdensity </span><span class="st">`</span>v<span class="st">&#39;, gen(_x`v&#39;</span> _d<span class="st">`</span><span class="dt">v&#39;) n(200) kernel(gauss) nograph</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a><span class="dt">local area </span><span class="st">`</span>area<span class="st">&#39; area _d`v&#39;</span> _x<span class="st">`</span><span class="dt">v&#39;, fc(</span><span class="st">`</span>c<span class="st">`</span><span class="dt">j&#39;&#39;) lc(black) lw(vthin) ||</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true"></a><span class="dt">local ord </span><span class="st">`</span>ord<span class="st">&#39; `j&#39;</span> <span class="st">&quot;20`y&#39;&quot;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true"></a>}</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true"></a>tw <span class="st">`</span><span class="dt">area&#39;, legend(order(</span><span class="st">`</span>ord<span class="st">&#39;) pos(1) region(lc(%0)))                                   ///</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true"></a><span class="st">ytitle(&quot;Density&quot;)                                                                       ///</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true"></a><span class="st">title(&quot;Revenus&quot;, pos(11)) xtitle(&quot;&quot;)                                                    ///</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true"></a><span class="st">ylabel(, angle(0) glc(gs3) glw(.1) labs(2) format(%9.5f))                               ///</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true"></a><span class="st">note(&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;, size(2))           ///</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true"></a><span class="st">graphr(color(white)) plotr(color(white))</span></span></code></pre></div>
+</details>
+<p><img src="img/img13.png" /></p>
+<p>Type beans [sans macro]</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a>gen _dr16b =<span class="st"> </span><span class="op">-</span>_dr16</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>tw  area _dr12 _xr12,   <span class="kw">fc</span>(red<span class="op">%60)  lc(%</span><span class="dv">0</span>)                                     <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a><span class="er">||</span><span class="st">  </span>line _dr12 _xr12,   <span class="kw">lc</span>(red)     <span class="kw">lw</span>(.<span class="dv">1</span>)                                     <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a><span class="er">||</span><span class="st">  </span>area _dr16b _xr16,  <span class="kw">fc</span>(blue<span class="op">%60) lc(%</span><span class="dv">0</span>)                                     <span class="op">/</span><span class="er">//</span><span class="st"> </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a><span class="er">||</span><span class="st">  </span>line _dr16b _xr16,  <span class="kw">lc</span>(blue)    <span class="kw">lw</span>(.<span class="dv">1</span>)                                     <span class="op">/</span><span class="er">//</span><span class="st">   </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a><span class="kw">legend</span>(<span class="kw">order</span>(<span class="dv">1</span> <span class="st">&quot;2012&quot;</span> <span class="dv">3</span> <span class="st">&quot;2016&quot;</span>) <span class="kw">pos</span>(<span class="dv">1</span>) <span class="kw">region</span>(<span class="kw">lc</span>(%<span class="dv">0</span>)))                         <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a><span class="kw">ytitle</span>(<span class="st">&quot;Density&quot;</span>)                                                              <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;Revenus&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>)) <span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>)                                           <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a><span class="kw">ylabel</span>(, <span class="kw">labc</span>(<span class="op">%0) glc(%</span><span class="dv">0</span>) <span class="kw">tlc</span>(%<span class="dv">0</span>))                                             <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>))  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true"></a><span class="kw">graphr</span>(<span class="kw">color</span>(white)) <span class="kw">plotr</span>(<span class="kw">color</span>(white))</span></code></pre></div>
+</details>
+<p><img src="img/img14.png" /></p>
+</div>
+</div>
+<div id="revenus-et-statut-matrimonial-histogrammes---densité---box" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Revenus et statut matrimonial: histogrammes - densité - box</h1>
+<div id="histogrammes" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> histogrammes</h2>
+<p>Superposition: peu lisible</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>local leg <span class="dv">1</span> <span class="st">&quot;Married or pacsed&quot;</span> <span class="dv">2</span> <span class="st">&quot;Cohabitant&quot;</span> <span class="dv">3</span> <span class="st">&quot;Isolated&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>tw histogram r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">3</span>, <span class="kw">bin</span>(<span class="dv">20</span>) percent <span class="kw">fc</span>(yellow%<span class="dv">50</span>) <span class="kw">lc</span>(black) <span class="kw">lw</span>(vvvthin) <span class="kw">start</span>(<span class="dv">0</span>)  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>histogram r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">2</span>, <span class="kw">bin</span>(<span class="dv">20</span>) percent <span class="kw">fc</span>(blue%<span class="dv">50</span>) <span class="kw">lc</span>(black)   <span class="kw">lw</span>(vvvthin) <span class="kw">start</span>(<span class="dv">0</span>)  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>histogram r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">1</span>, <span class="kw">bin</span>(<span class="dv">20</span>) percent <span class="kw">fc</span>(red%<span class="dv">50</span>)  <span class="kw">lc</span>(black)   <span class="kw">lw</span>(vvvthin) <span class="kw">start</span>(<span class="dv">0</span>)  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>, <span class="kw">legend</span>(<span class="kw">order</span>(<span class="st">`</span><span class="dt">leg&#39;))  </span></span></code></pre></div>
+</details>
+<p><img src="img/img15.png" /></p>
+<p>Facettes avec en arrière plan les distributions des autres modalités</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>local bgc <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>local note <span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>tw histogram r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">1</span>, <span class="kw">bin</span>(<span class="dv">20</span>) percent <span class="kw">fc</span>(red<span class="op">%20)    lc(%</span><span class="dv">0</span>)    <span class="kw">lw</span>(vvthin) <span class="kw">start</span>(<span class="dv">0</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>histogram r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">2</span>, <span class="kw">bin</span>(<span class="dv">20</span>) percent <span class="kw">fc</span>(blue<span class="op">%20)   lc(%</span><span class="dv">0</span>)    <span class="kw">lw</span>(vvthin) <span class="kw">start</span>(<span class="dv">0</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>histogram r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">3</span>, <span class="kw">bin</span>(<span class="dv">20</span>) percent <span class="kw">fc</span>(yellow%<span class="dv">70</span>) <span class="kw">lc</span>(black) <span class="kw">lw</span>(vvthin) <span class="kw">start</span>(<span class="dv">0</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a><span class="er">||</span>, <span class="kw">legend</span>(off)  <span class="kw">title</span>(<span class="st">&quot;Isolated&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>)) <span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>) <span class="st">`</span><span class="dt">bgc&#39; </span><span class="st">`</span>note<span class="st">&#39;  name(g1, replace)</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true"></a><span class="st">tw histogram r16 if ms16==3, bin(20) percent fc(yellow%20) lc(%0)    lw(vvthin) start(0) ///</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true"></a><span class="st">|| histogram r16 if ms16==1, bin(20) percent fc(red%20)    lc(%0)    lw(vvthin) start(0) ///</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true"></a><span class="st">|| histogram r16 if ms16==2, bin(20) percent fc(blue%70)   lc(black) lw(vvthin) start(0) ///</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true"></a><span class="st">||, legend(off)  title(&quot;Cohabitant&quot;, pos(11)) xtitle(&quot;&quot;) `bgc&#39;</span> <span class="st">`</span><span class="dt">note&#39;  name(g2, replace)</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true"></a><span class="dt">tw histogram r16 if ms16==3, bin(20) percent fc(yellow%20) lc(%0)    lw(vvthin) start(0) ///</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true"></a><span class="dt">|| histogram r16 if ms16==2, bin(20) percent fc(blue%20)   lc(%0)    lw(vvthin) start(0) ///</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true"></a><span class="dt">|| histogram r16 if ms16==1, bin(20) percent fc(red%70)    lc(black) lw(vvthin) start(0) ///</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true"></a><span class="dt">||, legend(off)  title(&quot;Married or pacsed couple&quot;, pos(11)) xtitle(&quot;&quot;) </span><span class="st">`</span>bgc<span class="st">&#39; `note&#39;</span>  <span class="kw">name</span>(g3, replace)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true"></a>graph combine g1 g2 g3 , <span class="kw">xsize</span>(<span class="dv">20</span>) <span class="kw">ysize</span>(<span class="dv">7</span>) <span class="kw">col</span>(<span class="dv">3</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;Equivalized continuous taxed income expressed in 207 $&quot;</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;Revenus 2016&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>))  <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span></code></pre></div>
+</details>
+<p><img src="img/img16.png" /></p>
+</div>
+<div id="densités" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Densités</h2>
+<p>Création des variables avec <code>kdensity</code></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>kdensity r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">1</span>, <span class="kw">kernel</span>(gauss) <span class="kw">n</span>(<span class="dv">300</span>)  <span class="kw">gen</span>(x1 d1) nograph</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>kdensity r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">2</span>, <span class="kw">kernel</span>(gauss) <span class="kw">n</span>(<span class="dv">300</span>)  <span class="kw">gen</span>(x2 d2) nograph</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>kdensity r16 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">3</span>, <span class="kw">kernel</span>(gauss) <span class="kw">n</span>(<span class="dv">300</span>)  <span class="kw">gen</span>(x3 d3) nograph</span></code></pre></div>
+</details>
+<p>Plus lisible qu’un histogramme à mon avis</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a>local leg <span class="kw">legend</span>(<span class="kw">order</span>(<span class="dv">3</span> <span class="st">&quot;Married or pacsed&quot;</span> <span class="dv">2</span> <span class="st">&quot;Cohabitant&quot;</span> <span class="dv">1</span> <span class="st">&quot;Isolated&quot;</span>) <span class="kw">pos</span>(<span class="dv">7</span>) <span class="kw">col</span>(<span class="dv">3</span>) <span class="kw">region</span>(<span class="kw">lc</span>(%<span class="dv">0</span>))) </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>local bgc <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>local note <span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>local title <span class="kw">title</span>(<span class="st">&quot;{bf:Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>)) <span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>) </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a>tw area d3 x3, <span class="kw">fc</span>(yellow%<span class="dv">50</span>) <span class="kw">lc</span>(black) <span class="kw">lw</span>(vthin) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>area d2 x2, <span class="kw">fc</span>(blue%<span class="dv">50</span>)   <span class="kw">lc</span>(black) <span class="kw">lw</span>(vthin) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>area d1 x1, <span class="kw">fc</span>(red%<span class="dv">50</span>)    <span class="kw">lc</span>(black) <span class="kw">lw</span>(vthin) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>, <span class="kw">ytitle</span>(<span class="st">&quot;&quot;</span>) <span class="st">`</span><span class="dt">leg&#39;  </span><span class="st">`</span>bgc<span class="st">&#39;  `note&#39;</span>  <span class="st">`</span><span class="dt">title&#39;</span></span></code></pre></div>
+</details>
+<p><img src="img/img17.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>local bgc <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a>local note <span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a>tw area d1 x1, <span class="kw">fc</span>(red<span class="op">%20)    lc(%</span><span class="dv">0</span>)                         <span class="op">/</span><span class="er">//</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>area d2 x2, <span class="kw">fc</span>(blue<span class="op">%20)   lc(%</span><span class="dv">0</span>)                         <span class="op">/</span><span class="er">//</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>area d3 x3, <span class="kw">fc</span>(yellow%<span class="dv">80</span>) <span class="kw">lc</span>(black)  <span class="kw">lw</span>(vthin)           <span class="op">/</span><span class="er">//</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true"></a><span class="er">||</span>, <span class="kw">legend</span>(off)  <span class="kw">title</span>(<span class="st">&quot;Isolated&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>))                 <span class="op">/</span><span class="er">//</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true"></a><span class="st"> </span><span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>) <span class="kw">ytitle</span>(<span class="st">&quot;Density&quot;</span>) <span class="st">`</span><span class="dt">bgc&#39; </span><span class="st">`</span>note<span class="st">&#39; name(g1, replace)</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true"></a><span class="st">tw area d3 x3, fc(yellow%20) lc(%0)                         ///</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true"></a><span class="st">|| area d2 x2, fc(red%20)    lc(%0)                         ///</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true"></a><span class="st">|| area d1 x1, fc(blue%80)   lc(black)  lw(vthin)           ///</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true"></a><span class="st">||, legend(off)  title(&quot;Cohabitant&quot;, pos(11))               ///</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true"></a><span class="st">    ylabel(, labc(%0))                                      ///</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true"></a><span class="st">    xtitle(&quot;&quot;) ytitle(&quot;&quot;) `bgc&#39;</span> <span class="st">`</span><span class="dt">note&#39; name(g2, replace)</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true"></a><span class="dt">tw area d3 x3, fc(yellow%20) lc(%0)                         ///</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true"></a><span class="dt">|| area d1 x1, fc(blue%20)   lc(%0)                         ///</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true"></a><span class="dt">|| area d2 x2, fc(red%80)    lc(black)  lw(vthin)           ///</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true"></a><span class="dt">||, legend(off)  title(&quot;Married or pacsed couple&quot;, pos(11)) ///</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true"></a><span class="dt">    ylabel(,labc(%0))                                       ///</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true"></a><span class="dt">    xtitle(&quot;&quot;) ytitle(&quot;&quot;) </span><span class="st">`</span>bgc<span class="st">&#39; `note&#39;</span> <span class="kw">name</span>(g3, replace)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a>graph combine g1 g2 g3 , <span class="kw">xsize</span>(<span class="dv">20</span>) <span class="kw">ysize</span>(<span class="dv">7</span>) <span class="kw">col</span>(<span class="dv">3</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;Equivalized continuous taxed income expressed in 2017 $&quot;</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;Revenus 2016&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>))  <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span></code></pre></div>
+</details>
+<p><img src="img/img18.png" /></p>
+</div>
+<div id="box" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Box</h2>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>graph box r16, <span class="kw">over</span>(ms16, descending) </span></code></pre></div>
+</details>
+<p><img src="img/img19.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>graph box r16, <span class="kw">over</span>(ms16, descending) horizontal </span></code></pre></div>
+</details>
+<p><img src="img/img20.png" /></p>
+<p>Ajouts d’options pour couleurs différentes (pas obligatoire cas variable statut mat sans dimension ordinale)</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>local bgc <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a>local note <span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a>local title <span class="kw">title</span>(<span class="st">&quot;{bf:Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>))   </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>local mops <span class="kw">msiz</span>(vsmall) <span class="kw">mlc</span>(black) <span class="kw">mlw</span>(vthin)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true"></a>graph hbox r16, <span class="kw">over</span>(ms16) asyvar                                       <span class="op">/</span><span class="er">//</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true"></a><span class="kw">bar</span>(<span class="dv">1</span>, <span class="kw">fc</span>(red)    <span class="kw">lc</span>(black) <span class="kw">lw</span>(thin))  <span class="kw">m</span>(<span class="dv">1</span>, <span class="kw">mc</span>(red%<span class="dv">40</span>)    <span class="st">`</span><span class="dt">mops&#39;)       ///</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true"></a><span class="dt">bar(2, fc(blue)   lc(black) lw(thin))  m(2, mc(blue%40)   </span><span class="st">`</span>mops<span class="st">&#39;)       ///</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true"></a><span class="st">bar(3, fc(yellow) lc(black) lw(thin))  m(3, mc(yellow%40) `mops&#39;</span>)       <span class="op">/</span><span class="er">//</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true"></a><span class="kw">legend</span>(<span class="kw">pos</span>(<span class="dv">11</span>) <span class="kw">row</span>(<span class="dv">1</span>) stack <span class="kw">region</span>(<span class="kw">lw</span>(<span class="dv">0</span>)) <span class="kw">size</span>(small) <span class="kw">symysize</span>(vsmall)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true"></a><span class="kw">ytitle</span>(<span class="st">&quot;&quot;</span>) <span class="st">`</span><span class="dt">bgc&#39; </span><span class="st">`</span>note<span class="st">&#39; `title&#39;</span> </span></code></pre></div>
+</details>
+<p><img src="img/img21.png" /></p>
+</div>
+</div>
+<div id="d-scatter---hexplot" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> 2d: scatter - hexplot</h1>
+<p>Revenus 2012 et 2016</p>
+<div id="scatter" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Scatter</h2>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>tw scatter r16 r12, <span class="kw">mc</span>(red)</span></code></pre></div>
+</details>
+<p><img src="img/img22.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>tw scatter r16 r12,  <span class="kw">mc</span>(red) <span class="kw">mlc</span>(white)</span></code></pre></div>
+</details>
+<p><img src="img/img23.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>tw scatter r16 r12, <span class="kw">msiz</span>(.<span class="dv">3</span>) <span class="kw">mc</span>(red) <span class="kw">mlc</span>(white) <span class="kw">mlw</span>(.<span class="dv">05</span>)</span></code></pre></div>
+</details>
+<p><img src="img/img24.png" /></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>tw scatter r16 r12, <span class="kw">msiz</span>(.<span class="dv">3</span>) <span class="kw">mc</span>(red%<span class="dv">50</span>) <span class="kw">mlc</span>(white) <span class="kw">mlw</span>(.<span class="dv">05</span>) <span class="kw">jitter</span>(<span class="dv">2</span>)</span></code></pre></div>
+</details>
+<p><img src="img/img25.png" /></p>
+<p>** Par statut matrimonial</p>
+<p><em>Avec transparence</em></p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a>local leg <span class="kw">legend</span>(<span class="kw">order</span>(<span class="dv">3</span> <span class="st">&quot;Married or pacsed&quot;</span> <span class="dv">2</span> <span class="st">&quot;Cohabitant&quot;</span> <span class="dv">1</span> <span class="st">&quot;Isolated&quot;</span>) <span class="kw">pos</span>(<span class="dv">11</span>) <span class="kw">col</span>(<span class="dv">3</span>) <span class="kw">region</span>(<span class="kw">lc</span>(%<span class="dv">0</span>))) </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a>local bg <span class="kw">plotr</span>(<span class="kw">color</span>(white)) <span class="kw">graphr</span>(<span class="kw">color</span>(white))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true"></a>local note <span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true"></a>local title <span class="kw">title</span>(<span class="st">&quot;{bf:Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>)) <span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>) </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a>local mops  <span class="kw">msiz</span>(<span class="dv">1</span>) <span class="kw">mlc</span>(black) <span class="kw">mlw</span>(.<span class="dv">05</span>) <span class="kw">jitter</span>(<span class="dv">2</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true"></a>tw scatter r16 r12 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">1</span>, <span class="kw">mc</span>(red%<span class="dv">60</span>)    <span class="st">`</span><span class="dt">mops&#39;     ///</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true"></a><span class="dt">|| scatter r16 r12 if ms16==3, mc(yellow%60)  </span><span class="st">`</span>mops<span class="st">&#39;    ///</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true"></a><span class="st">|| scatter r16 r12 if ms16==2, mc(blue%60)    `mops&#39;</span>    <span class="op">/</span><span class="er">//</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>, <span class="kw">xtitle</span>(<span class="st">&quot;2012&quot;</span>) <span class="kw">ytitle</span>(<span class="st">&quot;2016&quot;</span>)  <span class="st">`</span><span class="dt">note&#39; </span><span class="st">`</span>title<span class="st">&#39; `bg&#39;</span> <span class="op">/</span><span class="er">//</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true"></a><span class="st">`</span><span class="dt">leg&#39; </span><span class="st">`</span>title<span class="st">&#39; `note&#39;</span> <span class="st">`</span><span class="dt">bg&#39;</span></span></code></pre></div>
+</details>
+<p><img src="img/img26.png" /></p>
+<p><em>Avec diminution de la saturation</em></p>
+<p>Même programme, juste modifier les couleurs des bulles : par ex <strong><code>mc(red%60)</code></strong> par <strong><code>mc(red*.6)</code></strong></p>
+<p><img src="img/img27.png" /></p>
+Version avec un fond sombre (couleur gs3), et en utilisant <code>grstyle</code>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a>graph set window fontface <span class="st">&quot;Microsoft sans serif&quot;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a>grstyle  init</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a>grstyle set mesh, compact </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a>grstyle set legend <span class="dv">11</span>, nobox</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true"></a>local mops  <span class="kw">msiz</span>(<span class="dv">1</span>) <span class="kw">mlc</span>(black) <span class="kw">mlw</span>(.<span class="dv">05</span>) <span class="kw">jitter</span>(<span class="dv">2</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true"></a>local bg  <span class="kw">graphr</span>(<span class="kw">color</span>(gs3)) <span class="kw">plotr</span>(<span class="kw">color</span>(gs3))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true"></a>local xy <span class="kw">glc</span>(gs13) <span class="kw">glw</span>(vthin) <span class="kw">labc</span>(gs13)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true"></a>local leg <span class="kw">legend</span>(<span class="kw">order</span>(<span class="dv">1</span> <span class="st">&quot;Married or pacsed&quot;</span> <span class="dv">2</span> <span class="st">&quot;Cohabitant&quot;</span> <span class="dv">3</span> <span class="st">&quot;Isolated&quot;</span>) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true"></a><span class="st">      </span><span class="kw">row</span>(<span class="dv">1</span>) <span class="kw">color</span>(gs13))</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true"></a>local title <span class="kw">title</span>(<span class="st">&quot;{bf: Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>) <span class="kw">color</span>(gs13))      </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true"></a>tw scatter r16 r12 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">1</span>, <span class="kw">mc</span>(red<span class="op">*</span>.<span class="dv">60</span>)     <span class="st">`</span><span class="dt">mops&#39;          ///</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true"></a><span class="dt">|| scatter r16 r12 if ms16==3, mc(yellow*.60)  </span><span class="st">`</span>mops<span class="st">&#39;          ///</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true"></a><span class="st">|| scatter r16 r12 if ms16==2, mc(blue*.60)    `mops&#39;</span>          <span class="op">/</span><span class="er">//</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>, <span class="kw">xtitle</span>(<span class="st">&quot;2012&quot;</span>, <span class="kw">color</span>(gs13)) <span class="kw">ytitle</span>(<span class="st">&quot;2016&quot;</span>, <span class="kw">color</span>(gs13))   <span class="op">/</span><span class="er">//</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true"></a><span class="st">     `</span><span class="dt">title&#39; </span><span class="st">`</span>leg<span class="st">&#39;  `bg&#39;</span> <span class="kw">xlabel</span>(, <span class="st">`</span><span class="dt">xy&#39;)</span></span></code></pre></div>
+</details>
+<p><img src="img/img28.png" /></p>
+<p>** Facettes**</p>
+<p>Le programme suivant peut être automatisé dans une boucle</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>local mops  <span class="kw">msiz</span>(.<span class="dv">7</span>) <span class="kw">mlc</span>(gs3) <span class="kw">mlw</span>(.<span class="dv">1</span>) <span class="kw">jitter</span>(<span class="dv">2</span>) </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>local bg  <span class="kw">graphr</span>(<span class="kw">color</span>(gs3)) <span class="kw">plotr</span>(<span class="kw">color</span>(gs3))   </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a>local xy <span class="kw">glc</span>(gs13) <span class="kw">glw</span>(vthin) <span class="kw">labc</span>(gs13)         </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a>    </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true"></a>tw scatter r16 r12 <span class="cf">if</span> ms16<span class="op">!=</span><span class="dv">1</span>, <span class="kw">mc</span>(gs13%<span class="dv">20</span>)     <span class="st">`</span><span class="dt">mops&#39;            ///</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true"></a><span class="dt">|| scatter r16 r12 if ms16==1, mc(red%70)     </span><span class="st">`</span>mops<span class="st">&#39;             ///</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true"></a><span class="st">|| , xtitle(&quot;2012&quot;, color(gs13)) ytitle(&quot;2016&quot;, color(gs13))     ///</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true"></a><span class="st">     `leg&#39;</span>  <span class="st">`</span><span class="dt">bg&#39; xlabel(, </span><span class="st">`</span>xy<span class="st">&#39;) legend(off)  ///</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true"></a><span class="st">    title(&quot;Married or pacsed&quot;, pos(11) color(red*.6)) name(g1,replace)</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true"></a><span class="st">tw scatter r16 r12 if ms16!=2, mc(gs13%20)     `mops&#39;</span>            <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>scatter r16 r12 <span class="cf">if</span> ms16<span class="op">==</span><span class="dv">2</span>, <span class="kw">mc</span>(blue%<span class="dv">70</span>)        <span class="st">`</span><span class="dt">mops&#39;         ///</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true"></a><span class="dt">|| , xtitle(&quot;2012&quot;, color(gs13)) ytitle(&quot;2016&quot;, color(gs13))     ///</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true"></a><span class="dt">     </span><span class="st">`</span>leg<span class="st">&#39;  `bg&#39;</span> <span class="kw">xlabel</span>(, <span class="st">`</span><span class="dt">xy&#39;) legend(off)  ///</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true"></a><span class="dt">    title(&quot;Cohabitant&quot;, pos(11) color(blue*.6))   name(g2,replace)</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true"></a><span class="dt">    </span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true"></a><span class="dt">tw scatter r16 r12 if ms16!=3, mc(gs13%20)     </span><span class="st">`</span>mops<span class="st">&#39;              ///</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true"></a><span class="st">|| scatter r16 r12 if ms16==3, mc(yellow%70)        `mops&#39;</span>         <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true"></a><span class="er">||</span><span class="st"> </span>, <span class="kw">xtitle</span>(<span class="st">&quot;2012&quot;</span>, <span class="kw">color</span>(gs13)) <span class="kw">ytitle</span>(<span class="st">&quot;2016&quot;</span>, <span class="kw">color</span>(gs13))       <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true"></a><span class="st">     `</span><span class="dt">leg&#39;  </span><span class="st">`</span>bg<span class="st">&#39; xlabel(, `xy&#39;</span>) <span class="kw">legend</span>(off)  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">title</span>(<span class="st">&quot;Isolated&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>) <span class="kw">color</span>(yellow<span class="op">*</span>.<span class="dv">6</span>))   <span class="kw">name</span>(g3,replace)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true"></a>    </span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true"></a>graph combine g1 g2 g3, <span class="kw">col</span>(<span class="dv">3</span>) <span class="kw">xsize</span>(<span class="dv">20</span>) <span class="kw">ysize</span>(<span class="dv">10</span>)                <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true"></a><span class="kw">graphr</span>(<span class="kw">color</span>(gs3)) <span class="kw">plotr</span>(<span class="kw">color</span>(gs3))                              <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;{bf: Revenus 2012 &amp; 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>) <span class="kw">color</span>(gs13))           <span class="op">/</span><span class="er">//</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>) <span class="kw">color</span>(gs13))        </span></code></pre></div>
+</details>
+<p><img src="img/img29.png" /></p>
+<p>Même graphique, mais avec des couleurs différentes (collection colorbrewer) issues de palettes séquentielles (transition pour le graphique suivant qui nécessite ce type de palettes)</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>local s <span class="dv">5</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a>colorpalette matplotlib, spring <span class="kw">select</span>(<span class="st">`</span><span class="dt">s&#39;) opacity(60) nograph</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true"></a><span class="dt">local col1 </span><span class="st">`</span><span class="kw">r</span>(p1)<span class="st">&#39;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true"></a><span class="st">colorpalette matplotlib, spring select(`s&#39;</span>) nograph</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true"></a>local tcol1 <span class="st">`</span><span class="dt">r(p1)&#39;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true"></a><span class="dt">colorpalette matplotlib, autumn select(</span><span class="st">`</span>s<span class="st">&#39;) opacity(60) nograph</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true"></a><span class="st">local col2 `r(p1)&#39;</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true"></a>colorpalette matplotlib, autumn <span class="kw">select</span>(<span class="st">`</span><span class="dt">s&#39;) nograph</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true"></a><span class="dt">local tcol2 </span><span class="st">`</span><span class="kw">r</span>(p1)<span class="st">&#39;</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true"></a><span class="st">colorpalette matplotlib, winter select(15) opacity(60) nograph</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true"></a><span class="st">local col3 `r(p1)&#39;</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true"></a>colorpalette matplotlib, winter <span class="kw">select</span>(<span class="dv">15</span>) nograph</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true"></a>local tcol3 <span class="st">`</span><span class="dt">r(p1)&#39;</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true"></a><span class="dt">local mops  msiz(.7) mlc(gs3) mlw(.1) jitter(2) </span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true"></a><span class="dt">local bg  graphr(color(gs3)) plotr(color(gs3))   </span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true"></a><span class="dt">local xy glc(gs13) glw(vthin) labc(gs13)         </span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true"></a><span class="dt">    </span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true"></a><span class="dt">tw scatter r16 r12 if ms16==!1, mc(gs13%20)     </span><span class="st">`</span>mops<span class="st">&#39;          ///</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true"></a><span class="st">|| scatter r16 r12 if ms16==1, mc(&quot;`col1&#39;&quot;)    `mops&#39;           ///</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true"></a><span class="st">|| , xtitle(&quot;</span><span class="dv">2012</span><span class="st">&quot;, color(gs13)) ytitle(&quot;</span><span class="dv">2016</span><span class="st">&quot;, color(gs13))    ///</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true"></a><span class="st">     `leg&#39;  `bg&#39; xlabel(, `xy&#39;) legend(off)                     ///</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true"></a><span class="st">    title(&quot;</span>Married or pacsed<span class="st">&quot;, pos(11) color(&quot;`</span><span class="dt">tcol1&#39;&quot;)) name(g1,replace)</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true"></a></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true"></a><span class="dt">tw scatter r16 r12 if ms16!=2, mc(gs13%20)     </span><span class="st">`</span>mops<span class="st">&#39;         ///</span></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true"></a><span class="st">|| scatter r16 r12 if ms16==2, mc(&quot;`col2&#39;&quot;)    `mops&#39;         ///</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true"></a><span class="st">|| , xtitle(&quot;</span><span class="dv">2012</span><span class="st">&quot;, color(gs13)) ytitle(&quot;</span><span class="dv">2016</span><span class="st">&quot;, color(gs13))  ///</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true"></a><span class="st">     `leg&#39;  `bg&#39; xlabel(, `xy&#39;) legend(off)                   ///</span></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true"></a><span class="st">    title(&quot;</span>Cohabitant<span class="st">&quot;, pos(11) color(&quot;`</span><span class="dt">tcol2&#39;&quot;))     name(g2,replace)</span></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true"></a><span class="dt">    </span></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true"></a><span class="dt">tw scatter r16 r12 if ms16!=3, mc(gs13%20)         </span><span class="st">`</span>mops<span class="st">&#39;     ///</span></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true"></a><span class="st">|| scatter r16 r12 if ms16==3, mc(&quot;`col3&#39;&quot;)        `mops&#39;     ///</span></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true"></a><span class="st">|| , xtitle(&quot;</span><span class="dv">2012</span><span class="st">&quot;, color(gs13)) ytitle(&quot;</span><span class="dv">2016</span><span class="st">&quot;, color(gs13))  ///</span></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true"></a><span class="st">     `leg&#39;  `bg&#39; xlabel(, `xy&#39;) legend(off)                   ///</span></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true"></a><span class="st">    title(&quot;</span>Isolated<span class="st">&quot;, pos(11) color(&quot;`</span><span class="dt">tcol3&#39;&quot;))   name(g3,replace)</span></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true"></a><span class="dt">    </span></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true"></a><span class="dt">    </span></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true"></a><span class="dt">graph combine g1 g2 g3, col(3) xsize(20) ysize(10)      ///</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true"></a><span class="dt">graphr(color(gs3)) plotr(color(gs3))                    ///</span></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true"></a><span class="dt">title(&quot;{bf: Revenus 2012 &amp; 2016}&quot;, pos(11) color(gs13)) ///</span></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true"></a><span class="dt">note(&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;, size(2) color(gs13))        </span></span></code></pre></div>
+</details>
+<p><img src="img/img30.png" /></p>
+</div>
+<div id="hexplot" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Hexplot</h2>
+<p>Rappel principe: histogramme vu du dessus, la couleur de l’héxagone indique la hauteur des barres</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a>local var3 ms16</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a>local labn<span class="op">:</span><span class="st"> </span>value label  <span class="st">`</span><span class="dt">var3&#39;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a><span class="dt">local pal spring autumn winter</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a><span class="dt">local i=1</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true"></a><span class="dt">foreach pal2 of local pal {</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true"></a><span class="dt">   local j=</span><span class="st">`</span>i<span class="op">++</span><span class="st">&#39;</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true"></a><span class="st">  </span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true"></a><span class="st"> local title`j&#39;</span><span class="op">:</span><span class="st"> </span>label <span class="st">`</span><span class="dt">labn&#39; </span><span class="st">`</span>j<span class="st">&#39;</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true"></a><span class="st">  </span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true"></a><span class="st">colorpalette matplotlib, `pal2&#39;</span> <span class="kw">select</span>(<span class="dv">1</span>) <span class="kw">intensity</span>(<span class="fl">2.9</span>) nograph</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true"></a>   local bc <span class="st">`</span><span class="dt">&quot;&quot;</span><span class="st">`</span><span class="kw">r</span>(p1)<span class="st">&#39;&quot;&quot;&#39;</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true"></a>   colorpalette matplotlib, <span class="st">`</span><span class="dt">pal2&#39; select(15) nograph</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true"></a><span class="dt">   local tc </span><span class="st">`&quot;&quot;`</span><span class="dt">r(p1)&#39;&quot;&quot;&#39;</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true"></a><span class="dt">  hexplot r16 r12 if </span><span class="st">`</span>var3<span class="st">&#39;==`j&#39;</span>, <span class="kw">color</span>(matplotlib, <span class="st">`</span><span class="dt">pal2&#39;) plotr(color(</span><span class="st">`</span>bc<span class="st">&#39;)) p(lw(vvthin) lc(`bc&#39;</span>)<span class="er">)</span> <span class="kw">graphr</span>(<span class="kw">color</span>(<span class="st">`</span><span class="dt">bc&#39;))                                                                    ///</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true"></a><span class="dt">ytitle(&quot;&quot;) xtitle(&quot;&quot;) xlabel(,glw(.1)) ylabel(,glw(.1))             ///</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true"></a><span class="dt">title(&quot;</span><span class="st">`</span>title<span class="st">`</span><span class="dt">j&#39;&#39;&quot;, color(</span><span class="st">`</span>tc)<span class="st">&#39;) pos(11))                           ///</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true"></a><span class="st">legend(color(`tc&#39;</span>) <span class="kw">subtitle</span>(,<span class="kw">color</span>(<span class="st">`</span><span class="dt">tc&#39;)) region(color(</span><span class="st">`</span>bc<span class="st">&#39;))) name(g`j&#39;</span>, replace)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true"></a> <span class="er">}</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true"></a>graph combine g1 g2 g3, <span class="kw">col</span>(<span class="dv">3</span>) <span class="kw">xsize</span>(<span class="dv">20</span>) <span class="kw">ysize</span>(<span class="dv">6</span>) xcommon ycommon                        <span class="op">/</span><span class="er">//</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;{bf: Revenus 2012 &amp; 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>) <span class="kw">color</span>(gs8))                                   <span class="op">/</span><span class="er">//</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">3</span>) <span class="kw">color</span>(gs8)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true"></a><span class="kw">graphr</span>(<span class="kw">color</span>(<span class="dv">255</span> <span class="dv">164</span> <span class="dv">91</span>%<span class="dv">30</span>))     </span></code></pre></div>
+</details>
+<p><img src="img/img31.png" /></p>
+</div>
+</div>
+<div id="catplot---spineplot" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Catplot - spineplot</h1>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a>ssc install catplot</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a>ssc install spineplot</span></code></pre></div>
+<ul>
+<li>Commande de NJ Cox: trop de paramètres par défaut entrée dans sa commande, plusieurs options visent à les retirer</li>
+</ul>
+<p>Revenu 2016: appartenance aux décile selon le statut matrimonial.</p>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>xtile dr16 =<span class="st"> </span>r16, <span class="kw">nq</span>(<span class="dv">10</span>)</span></code></pre></div>
+</details>
+<div id="barres" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Barres</h2>
+<ul>
+<li>Pour obtenir des barres empilées, ajouter l’option* <strong><code>stack</code></strong></li>
+</ul>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>grstyle init</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a>grstyle set mesh, compact</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a>grstyle set legend <span class="dv">3</span>, nobox</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true"></a><span class="op">*</span>grstyle set color viridis,  <span class="kw">n</span>(<span class="dv">10</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true"></a>colorpalette viridis, <span class="kw">select</span>(<span class="dv">2</span> <span class="dv">7</span> <span class="dv">12</span>) nograph</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true"></a>grstyle set color <span class="st">&quot;`r(p1)&#39;&quot;</span> <span class="st">&quot;`r(p2)&#39;&quot;</span> <span class="st">&quot;`r(p3)&#39;&quot;</span>,  <span class="kw">n</span>(<span class="dv">10</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true"></a>catplot dr16, <span class="op">/</span><span class="er">*</span>stack<span class="op">*</span><span class="er">/</span><span class="st"> </span><span class="kw">percent</span>(ms16) <span class="kw">over</span>(ms16) asyvar <span class="op">/</span><span class="er">//</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true"></a><span class="kw">legend</span>( <span class="kw">pos</span>(<span class="dv">3</span>) <span class="kw">col</span>(<span class="dv">1</span>) <span class="kw">title</span>(<span class="st">&quot;Déciles&quot;</span>, <span class="kw">size</span>(small)))  <span class="op">/</span><span class="er">//</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true"></a><span class="kw">l1title</span>(<span class="st">&quot;&quot;</span>) <span class="kw">title</span>(<span class="st">&quot;{bf:Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>)) <span class="op">/</span><span class="er">//</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true"></a><span class="kw">note</span>(<span class="st">&quot;{it:Equivalized continuous taxed income expressed in 2017 $}&quot;</span>, <span class="kw">size</span>(<span class="dv">2</span>)) </span></code></pre></div>
+</details>
+<p><img src="img/img32.png" /></p>
+<p><img src="img/img33.png" /></p>
+</div>
+<div id="merimekko-mosaic-plot" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Merimekko (mosaic plot)</h2>
+<details>
+<summary>
+<B><font color="#178ACC">PROGRAMME</B></font>
+</summary>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a>colorpalette viridis, <span class="kw">select</span>(<span class="dv">2</span> <span class="dv">8</span> <span class="dv">13</span>) reverse nograph</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a>grstyle set color <span class="st">&quot;`r(p1)&#39;&quot;</span> <span class="st">&quot;`r(p2)&#39;&quot;</span> <span class="st">&quot;`r(p3)&#39;&quot;</span>,  <span class="kw">n</span>(<span class="dv">10</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>spineplot  dr16 ms16,                        <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true"></a><span class="kw">barall</span>(<span class="kw">fi</span>(inten100) <span class="kw">blw</span>(vvthin))             <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true"></a><span class="kw">legend</span>(<span class="kw">title</span>(<span class="st">&quot;Déciles&quot;</span>, <span class="kw">size</span>(small)))        <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true"></a><span class="kw">xlabel</span>(<span class="dv">0</span> <span class="fl">.81</span> <span class="fl">.86</span> <span class="dv">1</span> , <span class="kw">glw</span>(<span class="dv">0</span>) <span class="kw">axis</span>(<span class="dv">1</span>))         <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true"></a><span class="kw">xlabel</span>(, <span class="kw">glw</span>(<span class="dv">0</span>) alt <span class="kw">axis</span>(<span class="dv">2</span>))                 <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true"></a><span class="kw">ylabel</span>(<span class="dv">0</span>(.<span class="dv">1</span>)<span class="dv">1</span>, <span class="kw">axis</span>(<span class="dv">2</span>))                      <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true"></a><span class="kw">xtitle</span>(<span class="st">&quot;&quot;</span>, <span class="kw">axis</span>(<span class="dv">2</span>))                          <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true"></a><span class="kw">ytitle</span>(<span class="st">&quot;Percent&quot;</span>, <span class="kw">axis</span>(<span class="dv">2</span>))                   <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true"></a><span class="kw">xtitle</span>(<span class="st">&quot;Percent&quot;</span>, <span class="kw">axis</span>(<span class="dv">1</span>))                   <span class="op">/</span><span class="er">//</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true"></a><span class="kw">title</span>(<span class="st">&quot;{bf: Revenus 2016}&quot;</span>, <span class="kw">pos</span>(<span class="dv">11</span>))    </span></code></pre></div>
+</details>
+<p><img src="img/img34.png" /></p>
+</div>
+</div>
+<div id="exercice" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> EXERCICE</h1>
+<p>Pour la demi-journée supplémentaire, si vous avez le temps, reproduire le graphique de la slide 19<br />
+Les différentes slides indiquent les différentes étapes</p>
+<iframe width="1000" height="800" src="exercice.html">
+</iframe>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
