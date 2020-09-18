@@ -9,11 +9,6 @@ date: "04/09/2020"
 #    toc: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
 * Le TP suit l'ordre des graphiques présentées dans la partie "visualisation des données avec Stata"
 * Graphiques utilisés
   * histogramme, densité:`histogram` - `kdensity` / `area` `line`
@@ -24,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * J'ai utilisé trois couleurs simple pour une grande partie du document (red, blue, yellow), `colorpalette` et `grstyle` sont utilisés tardivement
 * Les personnes qui n'ont pas, au moins, la version 15 de stata, ne peuvent pas utiliser les effets de transparence: `option_couleur(couleur%#)`
 
-```{r,eval=F, echo=T} 
+```{} 
 use base4var, clear
 ```
 
@@ -35,7 +30,7 @@ use base4var, clear
 
 Premier graph du program 
 
-```{r,eval=F, echo=T} 
+```{} 
 histogram r16, normal 
 ```
 
