@@ -72,7 +72,6 @@ histogram r16, bin(20) color(blue)
 ![](img/img4.png)
 
 
-<summary><B><font color="#178ACC">PROGRAMME</B></font></summary>
 ```{r,eval=F, echo=T} 
 * barre et contour couleurs différentes
 histogram r16, bin(20) color(blue)
